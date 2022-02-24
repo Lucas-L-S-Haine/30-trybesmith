@@ -1,16 +1,15 @@
-import { Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import service from '../services/userService';
+import { UserI } from '../interfaces';
+
+const route = Router();
 
 const createOne = async (req: Request, res: Response) => {
-  try {
-    const { username, classe, level, password } = req.body;
-    const user: [string, string, number, string] = [username, classe, level, password];
-    await service.createOne(user);
-  } catch (err: any) {
-    return res.status(err.status).send(err.message);
-  }
+  const user: UserI = req.body;
+  const token = await service.createOne(user);
+  return res.status(201).json({ token });
 };
 
-export default {
-  createOne,
-};
+route.post('/', createOne);
+
+export default route;
