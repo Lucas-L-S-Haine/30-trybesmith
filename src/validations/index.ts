@@ -3,7 +3,7 @@ import HttpException from '../classes/httpException';
 import { isValidUsername, isValidClass, isValidPassword } from '../utils/functions';
 
 const validateUsername = (user: UserI): void => {
-  const error: HttpException = { name: '', error: '', message: '' };
+  const error: HttpException = { status: 500, name: '', error: '', message: '' };
   if (!user.username) {
     error.status = 400;
     error.error = 'Username is required';
@@ -22,7 +22,7 @@ const validateUsername = (user: UserI): void => {
 };
 
 const validateClass = (user: UserI): void => {
-  const error: HttpException = { name: '', error: '', message: '' };
+  const error: HttpException = { status: 500, name: '', error: '', message: '' };
   if (!user.classe) {
     error.status = 400;
     error.error = 'Classe is required';
@@ -41,7 +41,7 @@ const validateClass = (user: UserI): void => {
 };
 
 const validateLevel = (user: UserI): void => {
-  const error: HttpException = { name: '', error: '', message: '' };
+  const error: HttpException = { status: 500, name: '', error: '', message: '' };
   if (!user.level) {
     error.status = 400;
     error.error = 'Level is required';
@@ -60,7 +60,7 @@ const validateLevel = (user: UserI): void => {
 };
 
 const validatePassword = (user: UserI): void => {
-  const error: HttpException = { name: '', error: '', message: '' };
+  const error: HttpException = { status: 500, name: '', error: '', message: '' };
   if (!user.password) {
     error.status = 400;
     error.error = 'Password is required';

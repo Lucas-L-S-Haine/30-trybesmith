@@ -1,14 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
-import HttpException from '../classes/httpException';
+import { ErrorRequestHandler } from 'express';
 
-const errorHandler = (
-  error: HttpException,
-  request: Request,
-  response: Response,
-  _next: NextFunction,
+const errorHandler: ErrorRequestHandler = (
+  err,
+  request,
+  response,
+  _next,
 ) => {
-  const status = error.statusCode || error.status || 500;
-  response.status(status).send(error);
+  const status = err.status || 500;
+  const error = err.error || 'Internal error';
+  response.status(status).json({ error });
 };
 
 export default errorHandler;
