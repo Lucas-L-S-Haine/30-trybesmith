@@ -1,9 +1,9 @@
 import connection from './connection';
 import { ProductI } from '../interfaces';
 
-const create = (product: [string, string, number, string]): Promise<void> => connection
+const create = (product: [string, string]): Promise<void> => connection
   .execute(
-    'INSERT INTO Trybesmith.Products (productname, classe, level, password) VALUES (?, ?, ?, ?);',
+    'INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?);',
     product,
   ).then();
 
