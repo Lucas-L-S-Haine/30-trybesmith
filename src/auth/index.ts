@@ -1,32 +1,32 @@
 import { Response, NextFunction } from 'express';
 import { sign, decode, verify } from 'jsonwebtoken';
 import HttpException from '../classes/httpException';
-import UserRequest from '../classes/userRequest';
-import { UserI, LoginI } from '../interfaces';
+import { UserI, LoginI, RequestI } from '../interfaces';
 
 const JWT_SECRET = 'SA9D8JASD98HYAF9SFN89ash008yh08H808yh9SC8GH9ASCA987C';
 
-const verifyTokenPresence = (token: string): void => {
+const verifyTokenPresence = (token: string | undefined): void => {
   if (!token) {
     const error: HttpException = {
       name: 'authentication error',
       status: 401,
       message: 'Token not found',
-      error: 'unauthorized',
+      error: 'Token not found',
     };
     throw error;
   }
 };
 
-const verifyTokenValidity = (token: string): string => {
+const verifyTokenValidity = (authorization: string | undefined): string => {
   try {
+    const token = authorization || '';
     return `${verify(token, JWT_SECRET)}`;
   } catch (err) {
     const error: HttpException = {
       name: 'authentication error',
       status: 401,
       message: 'Expired or invalid token',
-      error: 'unauthorized',
+      error: 'Invalid token',
     };
     throw error;
   }
@@ -41,8 +41,8 @@ export function readToken(token: string) {
   return decode(token);
 }
 
-export function validateToken(req: UserRequest, _res: Response, next: NextFunction) {
-  const token: string = req.headers.authorization;
+export function validateToken(req: RequestI, _res: Response, next: NextFunction) {
+  const { authorization: token } = req.headers;
   verifyTokenPresence(token);
   const payload = verifyTokenValidity(token);
   req.user = payload;
