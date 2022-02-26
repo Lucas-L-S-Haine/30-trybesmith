@@ -6,7 +6,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const loginData: LoginI = req.body;
     const token = await service.createOne(loginData);
-    return res.status(201).json({ token });
+    return res.status(200).json({ token });
   } catch (err) {
     next(err);
   }

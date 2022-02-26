@@ -1,6 +1,5 @@
 import Product from '../models/product';
 import { ProductI } from '../interfaces';
-import { createToken } from '../auth';
 import { productValidate } from '../validations';
 
 const createOne = async (product: ProductI) => {

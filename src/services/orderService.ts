@@ -1,6 +1,5 @@
 import Order from '../models/order';
 import { OrderI } from '../interfaces';
-import { createToken } from '../auth';
 import { orderValidate } from '../validations';
 
 const createOne = async (order: OrderI) => {

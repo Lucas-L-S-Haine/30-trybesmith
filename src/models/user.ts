@@ -11,8 +11,8 @@ const findAll = () => connection
   .execute('SELECT id, username, classe, level FROM Trybesmith.Users;')
   .then(([users]) => users as UserI[]);
 
-const findOne = (name: string) => connection
-  .execute('SELECT * FROM Trybesmith.Users WHERE username = ?', [name])
+const findOne = (loginData: [string, string]) => connection
+  .execute('SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?', loginData)
   .then(([data]) => data as UserI[])
   .then(([user]) => user);
 

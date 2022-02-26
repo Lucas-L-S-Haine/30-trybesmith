@@ -1,4 +1,4 @@
-import { UserI, LoginI } from '../interfaces';
+import { LoginI } from '../interfaces';
 import HttpException from '../classes/httpException';
 
 const validateUsername = (loginData: LoginI): void => {
@@ -20,6 +20,6 @@ const validatePassword = (loginData: LoginI): void => {
 };
 
 export default function loginValidate(loginData: LoginI): void {
-  validateUsername(loginData);
   validatePassword(loginData);
+  validateUsername(loginData);
 }
