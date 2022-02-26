@@ -14,6 +14,12 @@ const createOne = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const readAll = (req: Request, res: Response, next: NextFunction) => service
+  .readAll()
+  .then((users: UserI[]) => res.status(200).json(users))
+  .catch((err: unknown) => next(err));
+
 route.post('/', createOne);
+route.get('/', readAll);
 
 export default route;

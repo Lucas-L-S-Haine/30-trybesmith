@@ -11,6 +11,12 @@ const createOne = async (user: UserI) => {
   return token;
 };
 
+const readAll = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
 export default {
   createOne,
+  readAll,
 };
