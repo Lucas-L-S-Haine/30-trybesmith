@@ -1,11 +1,10 @@
 import connection from './connection';
 
-const create = async (userData: [string, string, number, string]): Promise<void> => {
-  await connection.execute(
+const create = (userData: [string, string, number, string]): Promise<void> => connection
+  .execute(
     'INSERT INTO Trybesmith.Users (username, classe, level, password) VALUES (?, ?, ?, ?);',
     userData,
-  );
-};
+  ).then();
 
 /*
 findAll
