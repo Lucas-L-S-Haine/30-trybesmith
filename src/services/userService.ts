@@ -5,9 +5,11 @@ import { userValidate } from '../validations';
 
 const createOne = async (user: UserI) => {
   userValidate(user);
-  const token = createToken(user);
   const { username, classe, level, password } = user;
   await User.create([username, classe, level, password]);
+  const userData = await User.findOne([username, password]);
+  const { id } = userData;
+  const token = createToken({ id, username, password });
   return token;
 };
 
