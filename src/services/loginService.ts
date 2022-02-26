@@ -3,12 +3,10 @@ import { UserI, LoginI } from '../interfaces';
 import { createToken } from '../auth';
 import { loginValidate } from '../validations';
 
-const createOne = async (user: LoginI) => {
-  loginValidate(user);
-  const token = createToken(user);
-  const { username, classe, level, password } = user;
-  await User.create([username, classe, level, password]);
-  return token;
+const createOne = async (loginData: LoginI) => {
+  loginValidate(loginData);
+  const { username, password } = loginData;
+  return true;
 };
 
 export default {
