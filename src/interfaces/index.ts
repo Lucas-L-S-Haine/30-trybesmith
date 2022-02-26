@@ -11,3 +11,16 @@ export interface LoginI {
   username: string;
   password: string;
 }
+
+export interface ProductI {
+  id?: number;
+  name: string;
+  amount: string;
+  orderId?: number;
+}
+
+export interface OrderI {
+  id?: number;
+  userId?: number;
+  products?: number[];
+}
