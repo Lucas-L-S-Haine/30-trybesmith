@@ -1,5 +1,5 @@
 export default class UserHeaders extends Headers {
-  authorization: string;
+  authorization?: string;
 
   constructor(authorization: string) {
     super();
