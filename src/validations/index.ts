@@ -42,6 +42,11 @@ const validateClass = (user: UserI): void => {
 
 const validateLevel = (user: UserI): void => {
   const error: HttpException = { status: 500, name: '', error: '', message: '' };
+  if (user.level <= 0) {
+    error.status = 422;
+    error.error = 'Level must be greater than 0';
+    throw error;
+  }
   if (!user.level) {
     error.status = 400;
     error.error = 'Level is required';
@@ -50,11 +55,6 @@ const validateLevel = (user: UserI): void => {
   if (typeof user.level !== 'number') {
     error.status = 422;
     error.error = 'Level must be a number';
-    throw error;
-  }
-  if (user.level <= 0) {
-    error.status = 422;
-    error.error = 'Level must be greater than 0';
     throw error;
   }
 };
