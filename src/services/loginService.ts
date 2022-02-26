@@ -4,7 +4,7 @@ import { createToken } from '../auth';
 import { loginValidate } from '../validations';
 import HttpException from '../classes/httpException';
 
-const createOne = async (loginData: LoginI) => {
+const login = async (loginData: LoginI) => {
   loginValidate(loginData);
   const { username, password } = loginData;
   const userData = await User.findOne([username, password]);
@@ -20,5 +20,5 @@ const createOne = async (loginData: LoginI) => {
 };
 
 export default {
-  createOne,
+  login,
 };

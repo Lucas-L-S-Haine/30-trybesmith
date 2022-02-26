@@ -2,14 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import service from '../services/loginService';
 import { LoginI } from '../interfaces';
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const loginData: LoginI = req.body;
-    const token = await service.createOne(loginData);
-    return res.status(200).json({ token });
-  } catch (err) {
-    next(err);
-  }
-};
+const login = (req: Request, res: Response, next: NextFunction) => service
+  .login(req.body as LoginI)
+  .then((token) => res.status(200).json({ token }))
+  .catch((err: unknown) => next(err));
 
 export default login;
