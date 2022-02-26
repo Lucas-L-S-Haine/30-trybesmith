@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface UserI {
   id?: number;
   username: string;
@@ -23,4 +25,8 @@ export interface OrderI {
   id?: number;
   userId?: number;
   products?: number[];
+}
+
+export interface RequestI extends Request {
+  user?: string;
 }
