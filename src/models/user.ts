@@ -17,6 +17,12 @@ const findOne = (loginData: [string, string]) => connection
   .then(([data]) => data as UserI[])
   .then(([user]) => user);
 
+const findByName = (username: [string]) => connection
+  .execute(`SELECT id, username, classe, level FROM Trybesmith.Users
+    WHERE username = ?`, username)
+  .then(([data]) => data as UserI[])
+  .then(([user]) => user);
+
 /*
 findAll
 findOne
@@ -29,4 +35,5 @@ export default {
   create,
   findAll,
   findOne,
+  findByName,
 };
