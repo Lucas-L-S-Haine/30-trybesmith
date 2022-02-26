@@ -1,10 +1,8 @@
 import { Router } from 'express';
-import { createOne } from '../controllers/loginController';
+import login from '../controllers/loginController';
 
 const loginRouter = Router();
 
-loginRouter
-  .route('/')
-  .post(createOne);
+loginRouter.post('/', login);
 
 export default loginRouter;
