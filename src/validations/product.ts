@@ -1,6 +1,6 @@
 import { ProductI } from '../interfaces';
 import HttpException from '../classes/httpException';
-// import { isValidName, isValidAmount } from '../utils/functions';
+import { isValidName, isValidAmount } from '../utils/functions';
 
 const validateName = (product: ProductI): void => {
   const error: HttpException = { status: 500, name: '', error: '', message: '' };
@@ -14,7 +14,7 @@ const validateName = (product: ProductI): void => {
     error.error = 'Name must be a string';
     throw error;
   }
-  if (product.name.length <= 2) {
+  if (!isValidName(product.name)) {
     error.status = 422;
     error.error = 'Name must be longer than 2 characters';
     throw error;
@@ -33,7 +33,7 @@ const validateAmount = (product: ProductI): void => {
     error.error = 'Amount must be a string';
     throw error;
   }
-  if (product.amount.length <= 2) {
+  if (!isValidAmount(product.amount)) {
     error.status = 422;
     error.error = 'Amount must be longer than 2 characters';
     throw error;
