@@ -24,7 +24,7 @@ export interface ProductI {
 export interface OrderI {
   id?: number;
   userId?: number;
-  products?: number[];
+  products: number[];
 }
 
 export interface RequestI extends Request {
