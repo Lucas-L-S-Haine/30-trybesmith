@@ -6,7 +6,7 @@ const create = (product: [string, string]): Promise<void> => connection
   .then();
 
 const findAll = () => connection
-  .execute('SELECT id, productname, classe, level FROM Trybesmith.Products;')
+  .execute('SELECT * FROM Trybesmith.Products;')
   .then(([products]) => products as ProductI[]);
 
 const findOne = (name: [string]) => connection
