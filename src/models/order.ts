@@ -8,7 +8,7 @@ const create = (order: [string, string, number, string]): Promise<void> => conne
   ).then();
 
 const findAll = () => connection
-  .execute('SELECT id, ordername, classe, level FROM Trybesmith.Orders;')
+  .execute('SELECT * FROM Trybesmith.Orders;')
   .then(([orders]) => orders as OrderI[]);
 
 const findByPk = (id: number) => connection
