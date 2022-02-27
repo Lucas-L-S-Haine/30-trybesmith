@@ -9,6 +9,11 @@ const findAll = () => connection
   .execute('SELECT id, productname, classe, level FROM Trybesmith.Products;')
   .then(([products]) => products as ProductI[]);
 
+const findOne = (name: string) => connection
+  .execute('SELECT * FROM Trybesmith.Products WHERE name = ?', name)
+  .then(([data]) => data as ProductI[])
+  .then(([product]) => product);
+
 /*
 findAll
 findOne
@@ -20,4 +25,5 @@ destroy
 export default {
   create,
   findAll,
+  findOne,
 };
