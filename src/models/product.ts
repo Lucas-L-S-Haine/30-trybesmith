@@ -10,7 +10,7 @@ const findAll = () => connection
   .then(([products]) => products as ProductI[]);
 
 const findOne = (name: [string]) => connection
-  .execute('SELECT * FROM Trybesmith.Products WHERE name = ?', name)
+  .execute('SELECT id, name, amount FROM Trybesmith.Products WHERE name = ?', name)
   .then(([data]) => data as ProductI[])
   .then(([product]) => product);
 
