@@ -5,8 +5,8 @@ import { ProductI, RequestI } from '../interfaces';
 export const createOne = async (req: RequestI, res: Response, next: NextFunction) => {
   try {
     const product: ProductI = req.body;
-    const token = await service.createOne(product);
-    return res.status(201).json({ token });
+    const item = await service.createOne(product);
+    return res.status(201).json({ item });
   } catch (err) {
     next(err);
   }
