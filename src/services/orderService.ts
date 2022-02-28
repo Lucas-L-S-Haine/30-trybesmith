@@ -2,8 +2,9 @@ import Order from '../models/order';
 import { OrderI } from '../interfaces';
 import { orderValidate } from '../validations';
 
-const createOne = async (order: OrderI) => {
+const createOne = async (order: OrderI, userId: number) => {
   orderValidate(order);
+  await Order.create([userId]);
   return true;
 };
 

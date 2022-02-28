@@ -1,11 +1,9 @@
 import connection from './connection';
 import { OrderI } from '../interfaces';
 
-const create = (order: [string, string, number, string]): Promise<void> => connection
-  .execute(
-    'INSERT INTO Trybesmith.Orders (ordername, classe, level, password) VALUES (?, ?, ?, ?);',
-    order,
-  ).then();
+const create = (order: [number]): Promise<void> => connection
+  .execute('INSERT INTO Trybesmith.Orders (userId) VALUES (?);', order)
+  .then();
 
 const findAll = () => connection
   .execute('SELECT * FROM Trybesmith.Orders;')
@@ -17,9 +15,7 @@ const findByPk = (id: number) => connection
   .then(([order]) => order);
 
 /*
-findAll
 findOne
-findByPk
 update
 destroy
 */

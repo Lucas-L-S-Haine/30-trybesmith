@@ -14,10 +14,12 @@ const findOne = (name: [string]) => connection
   .then(([data]) => data as ProductI[])
   .then(([product]) => product);
 
+const findByPk = (id: number) => connection
+  .execute('SELECT * FROM Trybesmith.Products WHERE id = ?', [id])
+  .then(([data]) => data as ProductI[])
+  .then(([product]) => product);
+
 /*
-findAll
-findOne
-findByPk
 update
 destroy
 */
@@ -26,4 +28,5 @@ export default {
   create,
   findAll,
   findOne,
+  findByPk,
 };

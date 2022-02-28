@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { sign, decode, verify } from 'jsonwebtoken';
 import HttpException from '../classes/httpException';
-import { UserI, LoginI, RequestI } from '../interfaces';
+import { UserI, LoginI, RequestI, PayloadI } from '../interfaces';
 
 const JWT_SECRET = 'SA9D8JASD98HYAF9SFN89ash008yh08H808yh9SC8GH9ASCA987C';
 
@@ -32,16 +32,17 @@ const verifyTokenValidity = (authorization: string | undefined): string => {
   }
 };
 
-export function createToken(userData: UserI | LoginI) {
+export function createToken(userData: UserI | LoginI): string {
   const { id, username } = userData;
   return sign({ id, username }, JWT_SECRET);
 }
 
-export function readToken(token: string) {
-  return decode(token);
+export function readToken(authorization: string | undefined): PayloadI {
+  const token = authorization || '';
+  return decode(token) as PayloadI;
 }
 
-export function validateToken(req: RequestI, _res: Response, next: NextFunction) {
+export function validateToken(req: RequestI, _res: Response, next: NextFunction): void {
   const { authorization: token } = req.headers;
   verifyTokenPresence(token);
   const payload = verifyTokenValidity(token);

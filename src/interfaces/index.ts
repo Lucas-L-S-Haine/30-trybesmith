@@ -30,3 +30,9 @@ export interface OrderI {
 export interface RequestI extends Request {
   user?: string;
 }
+
+export interface PayloadI {
+  id: number;
+  username: string;
+  iat?: number;
+}
