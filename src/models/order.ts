@@ -14,6 +14,11 @@ const findByPk = (id: number) => connection
   .then(([data]) => data as OrderI[])
   .then(([order]) => order);
 
+const findLast = (): Promise<OrderI> => connection
+  .execute('SELECT * FROM Trybesmith.Orders ORDER BY id DESC LIMIT 1;')
+  .then(([data]) => data as OrderI[])
+  .then(([order]) => order);
+
 /*
 findOne
 update
@@ -24,4 +29,5 @@ export default {
   create,
   findAll,
   findByPk,
+  findLast,
 };
