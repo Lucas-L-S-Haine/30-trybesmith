@@ -19,7 +19,7 @@ const findByPk = (id: number): Promise<ProductI> => connection
   .then(([data]) => data as ProductI[])
   .then(([product]) => product);
 
-const findMany = (productIds: number[]) => connection
+const findMany = (productIds: number[]): Promise<ProductI[]> => connection
   .query('SELECT * FROM Trybesmith.Products WHERE id IN (?);', [productIds])
   .then(([products]) => products as ProductI[]);
 

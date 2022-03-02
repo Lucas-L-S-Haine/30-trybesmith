@@ -7,17 +7,17 @@ const create = (userData: [string, string, number, string]): Promise<void> => co
     userData,
   ).then();
 
-const findAll = () => connection
+const findAll = (): Promise<UserI[]> => connection
   .execute('SELECT id, username, classe, level FROM Trybesmith.Users;')
   .then(([users]) => users as UserI[]);
 
-const findOne = (loginData: [string, string]) => connection
+const findOne = (loginData: [string, string]): Promise<UserI> => connection
   .execute(`SELECT id, username, classe, level FROM Trybesmith.Users
     WHERE username = ? AND password = ?`, loginData)
   .then(([data]) => data as UserI[])
   .then(([user]) => user);
 
-const findByName = (username: [string]) => connection
+const findByName = (username: [string]): Promise<UserI> => connection
   .execute(`SELECT id, username, classe, level FROM Trybesmith.Users
     WHERE username = ?`, username)
   .then(([data]) => data as UserI[])
