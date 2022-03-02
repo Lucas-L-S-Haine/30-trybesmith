@@ -19,8 +19,12 @@ const findByPk = (id: number): Promise<ProductI> => connection
   .then(([data]) => data as ProductI[])
   .then(([product]) => product);
 
+const findMany = (productIds: number[]) => connection
+  .query('SELECT * FROM Trybesmith.Products WHERE id IN (?);', [productIds])
+  .then(([products]) => products as ProductI[]);
+
 const update = (orderId: number, productIds: number[]): Promise<void> => connection
-  .execute('UPDATE Trybesmith.Products SET orderId = ? WHERE id in (?);', [orderId, productIds])
+  .execute('UPDATE Trybesmith.Products SET orderId = ? WHERE id IN (?);', [orderId, productIds])
   .then();
 
 /*
@@ -33,5 +37,6 @@ export default {
   findAll,
   findOne,
   findByPk,
+  findMany,
   update,
 };
