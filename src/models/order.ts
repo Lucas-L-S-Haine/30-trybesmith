@@ -5,11 +5,11 @@ const create = (order: [number]): Promise<void> => connection
   .execute('INSERT INTO Trybesmith.Orders (userId) VALUES (?);', order)
   .then();
 
-const findAll = () => connection
+const findAll = (): Promise<OrderI[]> => connection
   .execute('SELECT * FROM Trybesmith.Orders;')
   .then(([orders]) => orders as OrderI[]);
 
-const findByPk = (id: number) => connection
+const findByPk = (id: number): Promise<OrderI> => connection
   .execute('SELECT * FROM Trybesmith.Orders WHERE id = ?', [id])
   .then(([data]) => data as OrderI[])
   .then(([order]) => order);

@@ -5,12 +5,11 @@ import { orderValidate } from '../validations';
 
 const createOne = async (order: OrderI, userId: number) => {
   orderValidate(order);
-  const { products: productIds } = order;
+  const { products } = order;
   await Order.create([userId]);
   const { id: orderId } = await Order.findLast() || 0;
-  await Product.update(orderId as number, productIds);
-  const productList = await Product.findMany(productIds);
-  return productList;
+  await Product.update(orderId as number, products);
+  return products;
 };
 
 const readAll = async () => {

@@ -8,8 +8,8 @@ export const createOne = async (req: RequestI, res: Response, next: NextFunction
     const order: OrderI = req.body;
     const { authorization: token } = req.headers;
     const { id: userId } = readToken(token);
-    const purchase = await service.createOne(order, userId);
-    return res.status(201).json({ order: purchase });
+    const products = await service.createOne(order, userId);
+    return res.status(201).json({ order: { userId, products } });
   } catch (err) {
     next(err);
   }
