@@ -3,13 +3,12 @@ import Product from '../models/product';
 import { OrderI } from '../interfaces';
 import { orderValidate } from '../validations';
 
-const createOne = async (order: OrderI, userId: number) => {
+const createOne = async (order: OrderI, userId: number): Promise<void> => {
   orderValidate(order);
   const { products } = order;
   await Order.create([userId]);
   const { id: orderId } = await Order.findLast() || 0;
   await Product.update(orderId as number, products);
-  return products;
 };
 
 const readAll = async () => {
