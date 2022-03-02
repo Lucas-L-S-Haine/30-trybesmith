@@ -23,5 +23,5 @@ export const readAll = (req: RequestI, res: Response, next: NextFunction) => ser
 
 export const readOne = (req: RequestI, res: Response, next: NextFunction) => service
   .readOne(Number(req.params.id))
-  .then((order: OrderI) => res.status(200).json(order))
+  .then((order) => res.status(200).json(order))
   .catch((err: unknown) => next(err));
