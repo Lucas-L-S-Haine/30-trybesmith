@@ -24,7 +24,7 @@ const findMany = (productIds: number[]) => connection
   .then(([products]) => products as ProductI[]);
 
 const update = (orderId: number, productIds: number[]): Promise<void> => connection
-  .execute('UPDATE Trybesmith.Products SET orderId = ? WHERE id IN (?);', [orderId, productIds])
+  .query('UPDATE Trybesmith.Products SET orderId = ? WHERE id IN (?);', [orderId, productIds])
   .then();
 
 /*
