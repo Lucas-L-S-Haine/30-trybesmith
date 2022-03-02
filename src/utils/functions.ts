@@ -1,4 +1,4 @@
-import * as regex from '../regex';
+import * as regex from './regex';
 
 const isValidUsername = (username: string): boolean => regex.username.test(username);
 const isValidClass = (classe: string): boolean => regex.classe.test(classe);
